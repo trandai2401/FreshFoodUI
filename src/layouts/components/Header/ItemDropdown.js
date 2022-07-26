@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { Children } from "react";
+
 import { Link } from "react-router-dom";
 
 import styles from "./Header.module.scss";
@@ -27,13 +27,20 @@ function ItemDropDown({
       >
         {children}
       </span>
-      <ul className={`dropdown-menu ${location}`}>
+      <ul className={cx(`dropdown-menu ${location}`, "dropdown-popper")}>
         {list.map((item, index) => {
           return (
             <li key={index}>
-              <Link to={`${to}/${item.id}`} className="dropdown-item" href="#">
-                {item.icon}
-                {item.title}
+              <Link
+                to={`${to}/${item.id}`}
+                className={cx("dropdown-item", "item-dropdown")}
+                href="#"
+              >
+                {item.icon ? (
+                  <div className={cx("icon-navigation")}> {item.icon}</div>
+                ) : null}
+
+                <div className={cx("title-item-dropdown")}> {item.title}</div>
               </Link>
             </li>
           );

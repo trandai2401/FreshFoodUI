@@ -28,5 +28,9 @@ const header_routes = [
   { title: "Tin tức", to: config.routes.tinTuc },
   { title: "Liên hệ", to: config.routes.lienHe },
 ];
-const LoggedIn = [{}];
+export const LoggedIn = [
+  { title: "Tài khoản", to: config.routes.tinTuc },
+  { title: "Giỏ hàng", to: config.routes.tinTuc },
+  { title: "Đăng xuất", to: config.routes.tinTuc },
+];
 export default header_routes;

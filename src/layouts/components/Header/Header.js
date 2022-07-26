@@ -7,12 +7,12 @@ import classNames from "classnames/bind";
 
 import styles from "./Header.module.scss";
 import images from "../../../assets/images";
-// For dropdown navigation but use bootstrap html
 import { Dropdown } from "bootstrap";
 import Item from "./Item";
 import ItemDropDown from "./ItemDropdown";
 import { ROUTE_HEADRS } from "../../../routes";
 import Avatar from "../../../components/Avatar/Avatar";
+import header_routes, { LoggedIn } from "../../../routes/header_routes";
 const cx = classNames.bind(styles);
 function Header() {
   return (
@@ -52,10 +52,14 @@ function Header() {
             </Form>
 
             <ItemDropDown align="end" location="dropdown-menu-end">
-              <i className={cx("fa-solid fa-cart-shopping")} />
+              <i class="fa-solid fa-cart-shopping" />
             </ItemDropDown>
 
-            <ItemDropDown align="end" location="dropdown-menu-end">
+            <ItemDropDown
+              align="end"
+              location="dropdown-menu-end"
+              list={LoggedIn}
+            >
               <Avatar
                 avatarDropdown
                 size={35}

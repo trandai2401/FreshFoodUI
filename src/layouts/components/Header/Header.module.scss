@@ -5,6 +5,11 @@
 .item-menu-dropdown::after {
   content: none;
 }
+.dropdown-popper {
+  width: auto;
+  border: none;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+}
 
 .item-nav {
   color: rgb(78, 78, 78);
@@ -14,4 +19,25 @@
   &:hover {
     color: rgb(17, 17, 17);
   }
+}
+
+.item-dropdown {
+  display: flex;
+
+  &:active {
+    background-color: #487c2a;
+  }
+}
+
+.title-item-dropdown {
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.icon-navigation + .title-item-dropdown {
+  text-align: left;
+}
+.icon-navigation {
+  width: 30px;
 }
