@@ -3,16 +3,16 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 
 import styles from "./Header.module.scss";
 import images from "../../../assets/images";
+// For dropdown navigation but use bootstrap html
 import { Dropdown } from "bootstrap";
 import Item from "./Item";
 import ItemDropDown from "./ItemDropdown";
 import { ROUTE_HEADRS } from "../../../routes";
+import Avatar from "../../../components/Avatar/Avatar";
 const cx = classNames.bind(styles);
 function Header() {
   return (
@@ -31,7 +31,11 @@ function Header() {
             >
               {ROUTE_HEADRS.map((route, index) => {
                 if ("list" in route) {
-                  return <ItemDropDown key={index} {...route} />;
+                  return (
+                    <ItemDropDown key={index} {...route}>
+                      {route.title}
+                    </ItemDropDown>
+                  );
                 }
                 return <Item key={index} {...route} />;
               })}
@@ -46,31 +50,18 @@ function Header() {
               />
               <Button variant="outline-success">Search</Button>
             </Form>
-            <NavDropdown
-              title={
-                <div
-                  style={{
-                    overflow: "hidden",
-                    width: "35px",
-                    height: "35px",
-                    display: "inline-block",
-                    borderRadius: "50%",
-                  }}
-                >
-                  <img
-                    width="35px"
-                    src={
-                      "https://i.pinimg.com/736x/19/03/32/1903320eeaa9f272d019e60c1c7d48c8.jpg"
-                    }
-                    alt="avatar"
-                  />
-                </div>
-              }
-              align="end"
-              id="navbarScrollingDropdown"
-            >
-              <div>fasdfa</div>
-            </NavDropdown>
+
+            <ItemDropDown align="end" location="dropdown-menu-end">
+              <i className={cx("fa-solid fa-cart-shopping")} />
+            </ItemDropDown>
+
+            <ItemDropDown align="end" location="dropdown-menu-end">
+              <Avatar
+                avatarDropdown
+                size={35}
+                src="https://i.pinimg.com/736x/19/03/32/1903320eeaa9f272d019e60c1c7d48c8.jpg"
+              />
+            </ItemDropDown>
           </Navbar.Collapse>
         </Container>
       </Navbar>

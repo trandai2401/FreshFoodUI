@@ -7,7 +7,7 @@ const publicRoutes = [
   { path: config.routes.login, component: Login },
   { path: config.routes.tinTuc, component: Login },
   { path: config.routes.lienHe, component: Login },
-  { path: config.routes.sanPham, component: Login },
+  { path: config.routes.sanPham + "/:id", component: Login },
   // { path: config.routes.login, component: Login },
   // { path: config.routes.login, component: Login },
   // { path: config.routes.login, component: Login },

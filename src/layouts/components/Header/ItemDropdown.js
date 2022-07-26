@@ -1,13 +1,23 @@
 import classNames from "classnames/bind";
+import { Children } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Header.module.scss";
 const cx = classNames.bind(styles);
-function ItemDropDown({ list, title }) {
+function ItemDropDown({
+  list = [],
+  avatarDropdown,
+  location = "",
+  to,
+  children,
+  ...props
+}) {
   return (
-    <div className={cx("nav-item dropdown")}>
+    <div {...props} className={cx("nav-item dropdown", { avatarDropdown })}>
       <span
         className={cx(
           "nav-link dropdown-toggle",
+
           "item-menu-dropdown",
           "item-nav"
         )}
@@ -15,16 +25,16 @@ function ItemDropDown({ list, title }) {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        Sản phẩm
+        {children}
       </span>
-      <ul className="dropdown-menu">
-        {list.map((item) => {
+      <ul className={`dropdown-menu ${location}`}>
+        {list.map((item, index) => {
           return (
-            <li>
-              <a className="dropdown-item" href="#">
+            <li key={index}>
+              <Link to={`${to}/${item.id}`} className="dropdown-item" href="#">
                 {item.icon}
                 {item.title}
-              </a>
+              </Link>
             </li>
           );
         })}
