@@ -1,0 +1,21 @@
+.wrapper {
+  height: 50px;
+}
+
+#navbarScrollingDropdown {
+  left: -50px;
+}
+
+.item-menu-dropdown::after {
+  content: none;
+}
+
+.item-nav {
+  color: rgb(78, 78, 78);
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover {
+    color: rgb(17, 17, 17);
+  }
+}
