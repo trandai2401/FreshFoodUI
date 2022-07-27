@@ -2,18 +2,21 @@ import classNames from "classnames/bind";
 
 import { Link } from "react-router-dom";
 
-import styles from "./Header.module.scss";
+import styles from "./Dropdown.module.scss";
 const cx = classNames.bind(styles);
-function ItemDropDown({
+function DropDown({
   list = [],
   avatarDropdown,
   location = "",
-  to,
+  to = "",
   children,
   ...props
 }) {
   return (
-    <div {...props} className={cx("nav-item dropdown", { avatarDropdown })}>
+    <div
+      {...props}
+      className={cx("nav-item dropdown", "item-nav", { avatarDropdown })}
+    >
       <span
         className={cx(
           "nav-link dropdown-toggle",
@@ -29,10 +32,11 @@ function ItemDropDown({
       </span>
       <ul className={cx(`dropdown-menu ${location}`, "dropdown-popper")}>
         {list.map((item, index) => {
+          console.log(`${to}/${item.to}`);
           return (
             <li key={index}>
               <Link
-                to={`${to}/${item.id}`}
+                to={`${to}/${item.to}`}
                 className={cx("dropdown-item", "item-dropdown")}
                 href="#"
               >
@@ -50,4 +54,4 @@ function ItemDropDown({
   );
 }
 
-export default ItemDropDown;
+export default DropDown;

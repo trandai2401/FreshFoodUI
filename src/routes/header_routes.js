@@ -7,19 +7,19 @@ const header_routes = [
     to: config.routes.sanPham,
     list: [
       {
-        id: 1,
+        to: 1,
         title: "Trái cây",
         icon: <i className="fa-solid fa-apple-whole" />,
       },
       {
-        id: 2,
+        to: 2,
         title: "Vật phẩm khô",
         icon: <i className="fa-solid fa-wheat-awn"></i>,
       },
-      { id: 3, title: "Rau củ", icon: <i className="fa-solid fa-seedling" /> },
-      { id: 4, title: " Thịt tươi", icon: <i className="fa-solid fa-cow" /> },
+      { to: 3, title: "Rau củ", icon: <i className="fa-solid fa-seedling" /> },
+      { to: 4, title: " Thịt tươi", icon: <i className="fa-solid fa-cow" /> },
       {
-        id: 5,
+        to: 5,
         title: "Hải sản",
         icon: <i className="fa-brands fa-octopus-deploy" />,
       },
@@ -29,8 +29,8 @@ const header_routes = [
   { title: "Liên hệ", to: config.routes.lienHe },
 ];
 export const LoggedIn = [
-  { title: "Tài khoản", to: config.routes.tinTuc },
-  { title: "Giỏ hàng", to: config.routes.tinTuc },
-  { title: "Đăng xuất", to: config.routes.tinTuc },
+  { title: "Tài khoản", to: "taikhoan" },
+  { title: "Giỏ hàng", to: "taikhoan" },
+  { title: "Đăng xuất", to: "taikhoan" },
 ];
 export default header_routes;

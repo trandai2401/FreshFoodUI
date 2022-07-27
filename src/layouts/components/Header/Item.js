@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
-function Item({ title, icon, to = "/" }) {
+function Item({ icon, to = "/", children }) {
   return (
     <Link to={to} className={cx("nav-link", "item-nav")}>
-      {title}
+      {children}
     </Link>
   );
 }

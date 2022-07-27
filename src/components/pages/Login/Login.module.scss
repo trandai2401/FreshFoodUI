@@ -1,0 +1,198 @@
+* {
+  font-family: "Varela Round", sans-serif;
+  margin: O auto;
+}
+
+/* content left */
+.container {
+  width: 100%;
+  height: auto;
+  margin-top: 90px;
+  position: relative;
+}
+.login-content {
+  margin-top: 150px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.login-content-itemone,
+.login-content-itemtwo {
+  margin-top: 30px;
+  height: 100%;
+}
+.login-content-item-introduce {
+  margin-left: 100px;
+}
+.content-item-heading {
+  font-size: 30px;
+  color: #216e38;
+}
+.content-img-introduce {
+  width: 100%;
+  height: 100%;
+}
+.img-introduce {
+  margin-top: 30px;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* content right */
+.content-heading-login {
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #216e38;
+  text-shadow: 4px 1px 3px #cff1c1;
+  margin-bottom: 20px;
+}
+.form-control {
+  width: 80%;
+  border-radius: 50px;
+  padding-left: 40px;
+}
+.form-user,
+.form-pass {
+  position: relative;
+  padding: 5px 0;
+}
+
+.form-user {
+  margin-bottom: 20px;
+}
+.form-user i,
+.form-pass i {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  padding: 3px 15px;
+  color: #216e38;
+  transition: 0.3s;
+}
+.form-control input:focus + i {
+  color: #216e38;
+}
+
+.forgot-pass {
+  font-size: 12px;
+  color: #216e38;
+}
+.forgot-pass:hover {
+  top: -10px;
+  text-decoration: none;
+  color: #216e38;
+  opacity: 0.6;
+}
+.forgot-remeber {
+  width: 80%;
+}
+.forgot-remeber label {
+  font-size: 12px;
+  color: #216e38;
+  margin-right: 5px;
+}
+.forgot-remeber label input {
+  font-size: 12px;
+  color: #216e38;
+  background-color: #216e38 !important;
+  margin-right: 5px;
+}
+.forgot-remeber label input:checked ~ .forgot-remeber label::before {
+  background-color: green !important;
+}
+.btn-login {
+  margin-right: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.btn-login-item {
+  margin: 20px 0;
+  width: 50%;
+  padding: 3px 8px;
+  background-color: #216e38;
+}
+.sign-in {
+  color: #216e38;
+}
+.sign-in:hover {
+  text-decoration: #216e38;
+  color: #216e38;
+  opacity: 0.6;
+}
+
+/* reponsive */
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-content-itemone {
+    display: none;
+  }
+  .login-content-itemtwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-user,
+  .form-pass {
+    width: 100%;
+  }
+  .form-control {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .form-user i,
+  .form-pass i {
+    padding: 3px 16px;
+  }
+  .btn-login {
+    width: 100%;
+  }
+  .btn-login-item {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 740px) {
+  .login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-content-itemone {
+    display: none;
+  }
+  .form-user i,
+  .form-pass i {
+    padding: 3px 16px;
+  }
+  .login-content-itemone,
+  .login-content-itemtwo {
+    margin-top: 20px;
+    /* height: 500px; */
+  }
+  .login-content-itemtwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-user,
+  .form-pass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}

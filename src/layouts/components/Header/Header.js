@@ -9,11 +9,14 @@ import styles from "./Header.module.scss";
 import images from "../../../assets/images";
 import { Dropdown } from "bootstrap";
 import Item from "./Item";
-import ItemDropDown from "./ItemDropdown";
+import DropDown from "./Dropdown/Dropdown";
 import { ROUTE_HEADRS } from "../../../routes";
 import Avatar from "../../../components/Avatar/Avatar";
 import header_routes, { LoggedIn } from "../../../routes/header_routes";
 const cx = classNames.bind(styles);
+
+const logined = false;
+
 function Header() {
   return (
     <>
@@ -32,12 +35,16 @@ function Header() {
               {ROUTE_HEADRS.map((route, index) => {
                 if ("list" in route) {
                   return (
-                    <ItemDropDown key={index} {...route}>
+                    <DropDown key={index} {...route}>
                       {route.title}
-                    </ItemDropDown>
+                    </DropDown>
                   );
                 }
-                return <Item key={index} {...route} />;
+                return (
+                  <Item key={index} {...route}>
+                    {route.title}
+                  </Item>
+                );
               })}
               {/* <ItemDropDown /> */}
             </Nav>
@@ -51,21 +58,16 @@ function Header() {
               <Button variant="outline-success">Search</Button>
             </Form>
 
-            <ItemDropDown align="end" location="dropdown-menu-end">
-              <i class="fa-solid fa-cart-shopping" />
-            </ItemDropDown>
-
-            <ItemDropDown
-              align="end"
-              location="dropdown-menu-end"
-              list={LoggedIn}
-            >
+            <DropDown align="end" location="dropdown-menu-end" list={LoggedIn}>
+              <i className="fa-solid fa-cart-shopping" />
+            </DropDown>
+            <DropDown align="end" location="dropdown-menu-end" list={LoggedIn}>
               <Avatar
                 avatarDropdown
-                size={35}
+                size={38}
                 src="https://i.pinimg.com/736x/19/03/32/1903320eeaa9f272d019e60c1c7d48c8.jpg"
               />
-            </ItemDropDown>
+            </DropDown>
           </Navbar.Collapse>
         </Container>
       </Navbar>
