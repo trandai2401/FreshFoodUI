@@ -1,62 +1,73 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import { login } from "../../../services";
 
 class LoginForm extends React.Component {
   state = {};
 
-  renderInput = ({ input, label, meta }) => {
-    const className = `field ${!meta.touched && meta.error ? "error" : ""}`;
+  renderInput = ({ input, label, meta, placeholder, type }) => {
+    const className = `field `;
     return (
-      <div className={className}>
-        <label>{label}</label>
-
-        <input {...input} />
+      <div className="col-sm-12">
+        <input
+          className="form-control"
+          {...input}
+          placeholder={placeholder}
+          type={type}
+        />
       </div>
     );
+  };
+
+  onFormSubmit = async (data) => {
+    // console.log(process.env.REACT_APP_BASE_URL);
+    let d = await login(data);
+    localStorage.setItem("tokenType", d.tokenType);
+    localStorage.setItem("accessToken", d.accessToken);
+
+    console.log(d);
   };
   render() {
     return (
       <>
-        <form>
-          <div class=" row">
-            <div class="col-sm-12">
-              <input
+        <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
+          <div className=" row">
+            <div className="col-sm-12">
+              <Field
+                value="admin"
+                label="Enter Title"
+                name="username"
                 type="text"
-                class="form-control"
-                id="staticEmail"
+                component={this.renderInput}
                 placeholder="Tên đăng nhập"
               />
             </div>
           </div>
-          <div class="mb-3 row">
-            <div class="col-sm-12">
+          <div className="mb-3 row">
+            <div className="col-sm-12">
               <Field
+                value={123456}
                 label="Enter Title"
-                name="title"
-                component={this.renderInput}
-              />
-              <input
+                name="password"
                 type="password"
-                class="form-control"
-                id="inputPassword"
+                component={this.renderInput}
                 placeholder="Mật khẩu"
               />
             </div>
           </div>
 
           <div className="forgot-remeber d-flex justify-content-between">
-            <a href="d" className="forgot-pass">
+            <Link to="/forgotpassword" className="forgot-pass">
               Quên mật khẩu
-            </a>
+            </Link>
             <label>
               <input type="checkbox" name="" />
               Nhớ mật khẩu
             </label>
           </div>
           <div className="btn-login d-flex justify-content-center mr-0">
-            <button type="button" class="btn btn-primary">
-              Đăng nhập
-            </button>
+            <button className="btn btn-primary">Đăng nhập</button>
           </div>
         </form>
       </>

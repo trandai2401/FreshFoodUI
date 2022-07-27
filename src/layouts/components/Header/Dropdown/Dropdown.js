@@ -32,7 +32,6 @@ function DropDown({
       </span>
       <ul className={cx(`dropdown-menu ${location}`, "dropdown-popper")}>
         {list.map((item, index) => {
-          console.log(`${to}/${item.to}`);
           return (
             <li key={index}>
               <Link
