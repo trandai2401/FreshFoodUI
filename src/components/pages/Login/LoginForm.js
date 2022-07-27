@@ -1,11 +1,19 @@
 import React from "react";
+import { Field, reduxForm } from "redux-form";
 
 class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("lam lanh qua");
-  }
   state = {};
+
+  renderInput = ({ input, label, meta }) => {
+    const className = `field ${!meta.touched && meta.error ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+
+        <input {...input} />
+      </div>
+    );
+  };
   render() {
     return (
       <>
@@ -22,6 +30,11 @@ class LoginForm extends React.Component {
           </div>
           <div class="mb-3 row">
             <div class="col-sm-12">
+              <Field
+                label="Enter Title"
+                name="title"
+                component={this.renderInput}
+              />
               <input
                 type="password"
                 class="form-control"
@@ -50,5 +63,8 @@ class LoginForm extends React.Component {
     );
   }
 }
-
-export default LoginForm;
+export default reduxForm({
+  form: "StreamForm",
+  validate: null,
+})(LoginForm);
+// export default LoginForm;
