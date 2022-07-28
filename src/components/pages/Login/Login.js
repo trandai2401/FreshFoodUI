@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import config from "../../../config";
 
 import styles from "./Login.module.scss";
 import LoginForm from "./LoginForm";
@@ -32,7 +33,7 @@ function Login() {
 
             <div className="d-flex justify-content-between">
               <p>Bạn chưa có tài khoản?</p>
-              <Link to="/signup" className="sign-in mx-1">
+              <Link to={config.routes.signup} className="sign-in mx-1">
                 Đăng kí ngay
               </Link>
             </div>

@@ -10,17 +10,22 @@ function DropDown({
   location = "",
   to = "",
   children,
+  classNameWrapper = "",
   ...props
 }) {
   return (
     <div
       {...props}
-      className={cx("nav-item dropdown", "item-nav", { avatarDropdown })}
+      className={cx(
+        "nav-item dropdown",
+        "item-nav",
+        { avatarDropdown },
+        classNameWrapper
+      )}
     >
       <span
         className={cx(
           "nav-link dropdown-toggle",
-
           "item-menu-dropdown",
           "item-nav"
         )}

@@ -1,5 +1,6 @@
 .wrapper {
   height: 50px;
+  padding-right: 30px;
 }
 
 .item-nav {
@@ -10,4 +11,8 @@
   &:hover {
     color: rgb(17, 17, 17);
   }
+}
+
+.cart {
+  padding: 10px;
 }

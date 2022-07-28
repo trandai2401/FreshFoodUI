@@ -12,7 +12,8 @@ import Item from "./Item";
 import DropDown from "./Dropdown/Dropdown";
 import { ROUTE_HEADRS } from "../../../routes";
 import Avatar from "../../../components/Avatar/Avatar";
-import header_routes, { LoggedIn } from "../../../routes/header_routes";
+import { LoggedIn } from "../../../routes/header_routes";
+import config from "../../../config";
 const cx = classNames.bind(styles);
 
 const logined = false;
@@ -58,16 +59,32 @@ function Header() {
               <Button variant="outline-success">Search</Button>
             </Form>
 
-            <DropDown align="end" location="dropdown-menu-end" list={LoggedIn}>
+            <DropDown
+              classNameWrapper="cart"
+              align="end"
+              location="dropdown-menu-end"
+              list={LoggedIn}
+            >
               <i className="fa-solid fa-cart-shopping" />
             </DropDown>
-            <DropDown align="end" location="dropdown-menu-end" list={LoggedIn}>
-              <Avatar
-                avatarDropdown
-                size={38}
-                src="https://i.pinimg.com/736x/19/03/32/1903320eeaa9f272d019e60c1c7d48c8.jpg"
-              />
-            </DropDown>
+
+            {logined ? (
+              <DropDown
+                align="end"
+                location="dropdown-menu-end"
+                list={LoggedIn}
+              >
+                <Avatar
+                  avatarDropdown
+                  size={38}
+                  src="https://i.pinimg.com/736x/19/03/32/1903320eeaa9f272d019e60c1c7d48c8.jpg"
+                />
+              </DropDown>
+            ) : (
+              <Item to={config.routes.login}>
+                Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              </Item>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
