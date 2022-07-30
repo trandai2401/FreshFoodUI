@@ -1,12 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { publicRoutes } from "./routes";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { Fragment } from "react";
 
 import DefaultLayout from "./layouts";
-import { Fragment } from "react";
+import history from "./history";
 
 function App() {
   return (
-    <Router>
+    <HistoryRouter history={history}>
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
@@ -20,6 +22,7 @@ function App() {
             const Page = route.component;
             return (
               <Route
+                exact
                 key={index}
                 path={route.path}
                 element={
@@ -32,7 +35,7 @@ function App() {
           })}
         </Routes>
       </div>
-    </Router>
+    </HistoryRouter>
   );
 }
 

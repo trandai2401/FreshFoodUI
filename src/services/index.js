@@ -21,3 +21,16 @@ export const signup = async (data) => {
     console.log(error);
   }
 };
+
+export const checkUsername = async (data) => {
+  try {
+    const res = await request.get("/api/check/username", {
+      params: {
+        q: data,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

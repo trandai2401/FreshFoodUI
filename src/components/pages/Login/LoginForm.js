@@ -1,7 +1,13 @@
 import React from "react";
+import { browserHistory } from "react-router";
+import { useHistory } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
+import config from "../../../config";
+import history from "../../../history";
 import { login } from "../../../services";
+import Input from "../../Input";
 
 class LoginForm extends React.Component {
   state = {};
@@ -21,12 +27,11 @@ class LoginForm extends React.Component {
   };
 
   onFormSubmit = async (data) => {
-    // console.log(process.env.REACT_APP_BASE_URL);
     let d = await login(data);
     localStorage.setItem("tokenType", d.tokenType);
     localStorage.setItem("accessToken", d.accessToken);
-
-    console.log(d);
+    history.push("/");
+    // console.log(d);
   };
   render() {
     return (
@@ -39,7 +44,7 @@ class LoginForm extends React.Component {
                 label="Enter Title"
                 name="username"
                 type="text"
-                component={this.renderInput}
+                component={Input}
                 placeholder="Tên đăng nhập"
               />
             </div>
@@ -51,7 +56,7 @@ class LoginForm extends React.Component {
                 label="Enter Title"
                 name="password"
                 type="password"
-                component={this.renderInput}
+                component={Input}
                 placeholder="Mật khẩu"
               />
             </div>

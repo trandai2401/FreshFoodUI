@@ -82,7 +82,7 @@ function Header() {
               </DropDown>
             ) : (
               <Item to={config.routes.login}>
-                Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                Đăng nhập <i className="fa-solid fa-arrow-right-to-bracket"></i>
               </Item>
             )}
           </Navbar.Collapse>
