@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import { reduxForm } from "redux-form";
 import config from "../../../config";
 
 import styles from "./Login.module.scss";
@@ -55,3 +56,5 @@ function Login() {
 }
 
 export default Login;
+// export default
+// export default Login;

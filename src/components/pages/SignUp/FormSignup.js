@@ -1,4 +1,5 @@
 import { Component } from "react";
+
 import { Field, reduxForm } from "redux-form";
 import { checkEmail, checkUsername, signup } from "../../../services";
 import Input from "../../Input";
@@ -8,10 +9,8 @@ import history from "../../../history";
 class FormSignup extends Component {
   state = {};
   onFormSubmit = async (data) => {
-    console.log(data);
     let d = await signup(data);
     history.push(config.routes.login);
-    console.log(d);
   };
 
   render() {
@@ -136,6 +135,7 @@ const asyncValidate = async ({ username, email } /*, dispatch */) => {
     }
   });
 };
+
 export default reduxForm({
   form: "SignupForm",
   validate,

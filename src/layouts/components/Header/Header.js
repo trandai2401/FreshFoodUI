@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import classNames from "classnames/bind";
+import { connect } from "react-redux";
 
 import styles from "./Header.module.scss";
 import images from "../../../assets/images";
@@ -14,11 +15,13 @@ import { ROUTE_HEADRS } from "../../../routes";
 import Avatar from "../../../components/Avatar/Avatar";
 import { LoggedIn } from "../../../routes/header_routes";
 import config from "../../../config";
+import { signOut } from "../../../actions";
+import history from "../../../history";
 const cx = classNames.bind(styles);
 
 const logined = false;
 
-function Header() {
+function Header(props) {
   return (
     <>
       <Navbar bg="light" expand="lg" className={cx("wrapper")}>
@@ -58,18 +61,31 @@ function Header() {
               />
               <Button variant="outline-success">Search</Button>
             </Form>
-
-            <DropDown
-              classNameWrapper="cart"
-              align="end"
-              location="dropdown-menu-end"
-              list={LoggedIn}
-            >
-              <i className="fa-solid fa-cart-shopping" />
-            </DropDown>
-
-            {logined ? (
+            {props.auth.isSignedIn && (
               <DropDown
+                classNameWrapper="cart"
+                align="end"
+                location="dropdown-menu-end"
+                list={LoggedIn}
+              >
+                <i className="fa-solid fa-cart-shopping" />
+              </DropDown>
+            )}
+
+            {props.auth.isSignedIn ? (
+              <DropDown
+                lastItemdropDown={(classWrapper, classTitle) => (
+                  <label
+                    className={classWrapper}
+                    href="#"
+                    onClick={() => {
+                      props.signOut();
+                      history.push(config.routes.login);
+                    }}
+                  >
+                    <div className={classTitle}>Đăng xuất</div>
+                  </label>
+                )}
                 align="end"
                 location="dropdown-menu-end"
                 list={LoggedIn}
@@ -92,4 +108,8 @@ function Header() {
   );
 }
 
-export default Header;
+const mapstateToProps = (state) => {
+  return { auth: state.auth };
+};
+
+export default connect(mapstateToProps, { signOut })(Header);

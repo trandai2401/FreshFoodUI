@@ -1,6 +1,7 @@
 import React from "react";
 import { browserHistory } from "react-router";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
@@ -8,6 +9,7 @@ import config from "../../../config";
 import history from "../../../history";
 import { login } from "../../../services";
 import Input from "../../Input";
+import { signIn } from "../../../actions";
 
 class LoginForm extends React.Component {
   state = {};
@@ -27,9 +29,10 @@ class LoginForm extends React.Component {
   };
 
   onFormSubmit = async (data) => {
-    let d = await login(data);
-    localStorage.setItem("tokenType", d.tokenType);
-    localStorage.setItem("accessToken", d.accessToken);
+    // let d = await login(data);
+    // localStorage.setItem("tokenType", d.tokenType);
+    // localStorage.setItem("accessToken", d.accessToken);
+    this.props.signIn(123);
     history.push("/");
     // console.log(d);
   };
@@ -79,8 +82,25 @@ class LoginForm extends React.Component {
     );
   }
 }
-export default reduxForm({
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.username) {
+    errors.username = "*Required";
+  }
+
+  if (!values.password) {
+    errors.password = "*Required";
+  }
+
+  return errors;
+};
+const mapstateToProps = (state) => {
+  return { stream: state.auth };
+};
+
+const component = reduxForm({
   form: "StreamForm",
-  validate: null,
+  validate,
 })(LoginForm);
-// export default LoginForm;
+export default connect(mapstateToProps, { signIn })(component);

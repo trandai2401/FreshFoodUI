@@ -11,6 +11,7 @@ function DropDown({
   to = "",
   children,
   classNameWrapper = "",
+  lastItemdropDown,
   ...props
 }) {
   return (
@@ -53,6 +54,15 @@ function DropDown({
             </li>
           );
         })}
+        <li>
+          {" "}
+          {lastItemdropDown
+            ? lastItemdropDown(
+                cx("dropdown-item", "item-dropdown"),
+                cx("title-item-dropdown")
+              )
+            : ""}
+        </li>
       </ul>
     </div>
   );
