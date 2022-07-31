@@ -1,3 +1,4 @@
+import { wait } from "@testing-library/user-event/dist/utils";
 import { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { checkUsername, login, signup } from "../../../services";
@@ -7,7 +8,7 @@ import InputNeedToCheck from "../../Input/InputNeedTiCheck";
 class FormSignup extends Component {
   state = {};
   onFormSubmit = async (data) => {
-    // console.log(data);
+    console.log(data);
     let d = await signup(data);
     // Viết lệnh quay về trang Đăng nhập
     // code ....
@@ -81,23 +82,16 @@ class FormSignup extends Component {
   }
 }
 
-const validate = async (values) => {
-  // let d = sleep(1000)
-  //   .then(() => {
-  //     // simulate server latency
-  //     console.log(idTimeOutUsername);
-  //     clearTimeout(idTimeOutUsername);
-  //     checkUsername(values.username).then((value) => {
-  //       // if (!value) {
-  //       //   throw { username: "Tài khoản người dùng đã tồn tại" };
-  //       // }
-  //       console.log({ username: "Tài khoản người dùng đã tồn tại" });
-  //       return { username: "Tài khoản người dùng đã tồn tại" };
-  //     });
-  //   })
-  //   .then((v) => v);
-  // console.log(d);
-  return {};
+const validate = (values) => {
+  console.log(1);
+  const errors = {};
+  if (!values.username) {
+    errors.username = "Required";
+  }
+  if (!values.password) {
+    errors.password = "Required";
+  }
+  return errors;
 };
 
 const sleep = (ms) =>
@@ -105,23 +99,32 @@ const sleep = (ms) =>
     setTimeout(resolve, ms);
   });
 
-const asyncValidate = async (values /*, dispatch */) => {
-  // console.log(a);
+const asyncValidate = async ({ username, email } /*, dispatch */) => {
+  console.log(username, email);
+  const checkUsernam = username
+    ? checkUsername(username).then((value) => {
+        if (!value) return { username: "Tài khoản người dùng đã tồn tại" };
+      })
+    : null;
 
-  return sleep(0).then(async (i) => {
-    // simulate server latency
+  const checkEmail = email
+    ? checkUsername(email).then((value) => {
+        if (!value) return { email: "Email người dùng đã tồn tại" };
+      })
+    : null;
 
-    await checkUsername(values.username).then((value) => {
-      if (!value) {
-        throw { username: "Tài khoản người dùng đã tồn tại" };
-      }
-      return { username: "Tài khoản người dùng đã tồn tại" };
-    });
+  return Promise.all([checkUsernam, checkEmail]).then(async (values) => {
+    const error = values.reduce((pre, cur) => {
+      return { ...pre, ...cur };
+    }, {});
+    if (Object.keys(error).length > 0) {
+      throw error;
+    }
   });
 };
 export default reduxForm({
   form: "SignupForm",
   validate,
-  asyncValidate,
-  asyncBlurFields: ["username"],
+  // asyncValidate,
+  // asyncBlurFields: ["username", "email"],
 })(FormSignup);

@@ -2,10 +2,6 @@ import { Component } from "react";
 import { checkUsername } from "../../services";
 
 class InputNeedToCheck extends Component {
-  state = {
-    error: true,
-  };
-
   render() {
     let {
       input,
@@ -18,7 +14,7 @@ class InputNeedToCheck extends Component {
 
     return (
       <div className={classWrapper}>
-        <p>{error}</p>
+        {touched && error && <span>{error}</span>}
         <input
           className="form-control"
           {...input}
