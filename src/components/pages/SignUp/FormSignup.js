@@ -1,34 +1,32 @@
-import { wait } from "@testing-library/user-event/dist/utils";
 import { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import { checkUsername, login, signup } from "../../../services";
+import { checkEmail, checkUsername, signup } from "../../../services";
 import Input from "../../Input";
-import InputNeedToCheck from "../../Input/InputNeedTiCheck";
+import config from "../../../config";
+import history from "../../../history";
 
 class FormSignup extends Component {
   state = {};
   onFormSubmit = async (data) => {
     console.log(data);
     let d = await signup(data);
-    // Viết lệnh quay về trang Đăng nhập
-    // code ....
+    history.push(config.routes.login);
     console.log(d);
   };
 
   render() {
-    // console.log("render Form");
     return (
       <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
         <Field
           name="email"
           type="email"
-          component={InputNeedToCheck}
+          component={Input}
           placeholder="Email"
         />
         <Field
           name="username"
           type="text"
-          component={InputNeedToCheck}
+          component={Input}
           placeholder="Tên đăng nhập"
         />
 
@@ -83,37 +81,53 @@ class FormSignup extends Component {
 }
 
 const validate = (values) => {
-  console.log(1);
+  console.log(values);
   const errors = {};
+  if (!values.email) {
+    errors.email = "*Required";
+  }
   if (!values.username) {
-    errors.username = "Required";
+    errors.username = "*Required";
   }
+
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = "*Required";
   }
+
+  if (!values.fullName) {
+    errors.fullName = "*Required";
+  }
+
+  if (!values.address) {
+    errors.address = "*Required";
+  }
+
+  if (!values.phone) {
+    errors.phone = "*Required";
+  }
+
+  if (!values.doB) {
+    errors.doB = "*Required";
+  }
+
   return errors;
 };
 
-const sleep = (ms) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-
 const asyncValidate = async ({ username, email } /*, dispatch */) => {
   console.log(username, email);
-  const checkUsernam = username
+  const checkU = username
     ? checkUsername(username).then((value) => {
         if (!value) return { username: "Tài khoản người dùng đã tồn tại" };
       })
     : null;
 
-  const checkEmail = email
-    ? checkUsername(email).then((value) => {
+  const checkE = email
+    ? checkEmail(email).then((value) => {
         if (!value) return { email: "Email người dùng đã tồn tại" };
       })
     : null;
 
-  return Promise.all([checkUsernam, checkEmail]).then(async (values) => {
+  return Promise.all([checkU, checkE]).then(async (values) => {
     const error = values.reduce((pre, cur) => {
       return { ...pre, ...cur };
     }, {});
@@ -125,6 +139,6 @@ const asyncValidate = async ({ username, email } /*, dispatch */) => {
 export default reduxForm({
   form: "SignupForm",
   validate,
-  // asyncValidate,
-  // asyncBlurFields: ["username", "email"],
+  asyncValidate,
+  asyncBlurFields: ["username", "email"],
 })(FormSignup);

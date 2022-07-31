@@ -1,6 +1,7 @@
 import { Component } from "react";
-import { checkUsername } from "../../services";
-
+import classNames from "classnames/bind";
+import styles from "./Input.module.scss";
+const cx = classNames.bind(styles);
 class InputNeedToCheck extends Component {
   render() {
     let {
@@ -10,7 +11,6 @@ class InputNeedToCheck extends Component {
       classWrapper,
       meta: { touched, error, warning },
     } = this.props;
-    console.log(error);
 
     return (
       <div className={classWrapper}>

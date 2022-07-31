@@ -34,3 +34,15 @@ export const checkUsername = async (data) => {
     console.log(error);
   }
 };
+export const checkEmail = async (data) => {
+  try {
+    const res = await request.get("/api/check/email", {
+      params: {
+        q: data,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
